@@ -1,13 +1,49 @@
-const COLUMNS = [
-  { title: "Adventures", links: ["Group tours", "Private tours", "Safaris", "Sailing trips", "Day trips"] },
-  { title: "Destinations", links: ["Egypt", "Morocco", "Tanzania", "Vietnam", "Sri Lanka"] },
-  { title: "About P&K", links: ["Our story", "Why book with us", "Responsible travel", "Careers", "Reviews"] },
-  { title: "Help", links: ["Contact us", "Booking conditions", "Travel insurance", "Visas", "FAQs"] },
+import { Link } from "@tanstack/react-router";
+
+type FooterLink = { label: string; to: string; search?: Record<string, string> };
+
+const COLUMNS: { title: string; links: FooterLink[] }[] = [
+  {
+    title: "Adventures",
+    links: [
+      { label: "Group tours", to: "/trips", search: { style: "Group tour" } },
+      { label: "Private tours", to: "/trips", search: { style: "Private tour" } },
+      { label: "Safaris", to: "/trips", search: { style: "Safari" } },
+      { label: "Sailing trips", to: "/trips", search: { style: "Sail & cruise" } },
+      { label: "All adventures", to: "/trips" },
+    ],
+  },
+  {
+    title: "Destinations",
+    links: [
+      { label: "Egypt", to: "/trips", search: { q: "Egypt" } },
+      { label: "Morocco", to: "/trips", search: { q: "Morocco" } },
+      { label: "Tanzania", to: "/trips", search: { q: "Tanzania" } },
+      { label: "Vietnam", to: "/trips", search: { q: "Vietnam" } },
+      { label: "Sri Lanka", to: "/trips", search: { q: "Sri Lanka" } },
+    ],
+  },
+  {
+    title: "About P&K",
+    links: [
+      { label: "Why book with us", to: "/" },
+      { label: "Traveller reviews", to: "/" },
+      { label: "Contact us", to: "/contact" },
+    ],
+  },
+  {
+    title: "Help",
+    links: [
+      { label: "Contact us", to: "/contact" },
+      { label: "Request a booking", to: "/trips" },
+      { label: "Browse trips", to: "/trips" },
+    ],
+  },
 ];
 
 export function Footer() {
   return (
-    <footer id="contact" className="bg-primary text-primary-foreground">
+    <footer id="contact-info" className="bg-primary text-primary-foreground">
       <div className="container-pk grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-5">
         <div>
           <span className="font-display text-2xl font-extrabold">P&amp;K</span>
@@ -29,13 +65,14 @@ export function Footer() {
             <h3 className="text-sm font-bold uppercase tracking-wider text-accent">{col.title}</h3>
             <ul className="mt-4 space-y-2.5">
               {col.links.map((link) => (
-                <li key={link}>
-                  <a
-                    href="#tours"
+                <li key={`${col.title}-${link.label}`}>
+                  <Link
+                    to={link.to}
+                    search={link.search ?? {}}
                     className="text-sm text-primary-foreground/75 transition-colors hover:text-primary-foreground"
                   >
-                    {link}
-                  </a>
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
