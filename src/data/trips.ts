@@ -4,6 +4,7 @@ import safari from "@/assets/dest-safari.jpg";
 import srilanka from "@/assets/dest-srilanka.jpg";
 import sailing from "@/assets/dest-sailing.jpg";
 import hero from "@/assets/hero.jpg";
+import kenya from "@/assets/dest-kenya.jpg";
 
 export type Trip = {
   slug: string;
@@ -223,6 +224,71 @@ export const TRIPS: Trip[] = [
     ],
     included: ["11 nights hotels, cruise & train", "Internal flight & transfers", "Local guides throughout", "Daily breakfast, 5 meals", "Cooking class"],
     notIncluded: ["International flights", "Vietnam visa", "Travel insurance", "Optional excursions"],
+  },
+  {
+    slug: "masai-mara-migration",
+    title: "Masai Mara Migration",
+    place: "Kenya",
+    days: "7 days",
+    price: "$2,190",
+    was: "$2,650",
+    rating: 4.9,
+    image: kenya,
+    style: "Safari",
+    summary:
+      "Big cats, endless plains and the thunder of hooves across the Masai Mara - Kenya's greatest safari with hot-air balloon option and Maasai village visits.",
+    highlights: [
+      "Daily game drives in the Masai Mara Reserve",
+      "Great Migration river crossings (Jul-Oct)",
+      "Optional sunrise hot-air balloon safari",
+      "Visit a Maasai village and learn beadwork",
+      "Stay in a tented camp on the Mara rim",
+    ],
+    itinerary: [
+      { day: "Day 1", title: "Arrive Nairobi", text: "Meet your guide, transfer to a boutique hotel and safari briefing over dinner." },
+      { day: "Day 2", title: "Nairobi to Masai Mara", text: "Scenic drive through the Rift Valley to your tented camp on the Mara." },
+      { day: "Day 3", title: "Mara game drives", text: "Morning and afternoon drives searching for the Big Five and cheetah." },
+      { day: "Day 4", title: "Migration plains", text: "Full day on the plains with a picnic lunch, focused on the herds and predators." },
+      { day: "Day 5", title: "Balloon & village", text: "Optional balloon flight, then visit a Maasai village for songs and traditions." },
+      { day: "Day 6", title: "Lake Naivasha", text: "Boat ride among hippos and birdlife, optional walk on Crescent Island." },
+      { day: "Day 7", title: "Departure", text: "Return to Nairobi for your onward flight." },
+    ],
+    included: ["6 nights lodges & tented camp", "4x4 safari vehicle with pop-top roof", "All park & reserve fees", "Full board on safari", "Maasai village visit"],
+    notIncluded: ["International flights", "Hot-air balloon safari", "Travel insurance", "Drinks & tips"],
+  },
+  {
+    slug: "kenya-safari-and-beach",
+    title: "Kenya Safari & Beach",
+    place: "Kenya",
+    days: "10 days",
+    price: "$2,680",
+    was: "$3,190",
+    rating: 4.8,
+    image: kenya,
+    style: "Group tour",
+    summary:
+      "The classic Kenya combo: the Masai Mara's wildlife, Rift Valley lakes and the palm-fringed beaches of Diani for the ultimate bush-to-beach escape.",
+    highlights: [
+      "Big Five game drives in the Masai Mara",
+      "Boat safari on Lake Naivasha",
+      "Amboseli elephants with Kilimanjaro views",
+      "Relax on Diani's white-sand beach",
+      "Swahili cooking class in Mombasa",
+    ],
+    itinerary: [
+      { day: "Day 1", title: "Arrive Nairobi", text: "Airport transfer, welcome dinner and introduction to your group." },
+      { day: "Day 2", title: "Amboseli", text: "Drive south to Amboseli for elephants and Kilimanjaro sunsets." },
+      { day: "Day 3", title: "Amboseli game drives", text: "Morning and afternoon drives, visit an observation hill for panoramas." },
+      { day: "Day 4", title: "Lake Naivasha", text: "Cross the Rift Valley, afternoon boat ride among hippos and pelicans." },
+      { day: "Day 5", title: "Masai Mara", text: "Drive to the Mara, evening game drive and camp dinner." },
+      { day: "Day 6", title: "Mara plains", text: "Full day exploring the reserve, tracking lions and the migrating herds." },
+      { day: "Day 7", title: "Fly to Diani", text: "Short flight to the coast and transfer to a beach resort." },
+      { day: "Day 8", title: "Diani beach", text: "Free day for snorkelling, dhow sailing or simply relaxing by the sea." },
+      { day: "Day 9", title: "Mombasa", text: "Day trip to historic Mombasa old town and a Swahili cooking class." },
+      { day: "Day 10", title: "Departure", text: "Transfer to Mombasa or Nairobi airport for your flight home." },
+    ],
+    included: ["9 nights lodges, camp & beach hotel", "Internal flight to Diani", "4x4 safari vehicle & boat trip", "All park fees", "Swahili cooking class"],
+    notIncluded: ["International flights", "Drinks & meals where stated", "Travel insurance", "Tips"],
   },
 ];
 
