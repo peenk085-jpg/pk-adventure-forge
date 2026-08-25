@@ -18,6 +18,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
     links: [
       { label: "Egypt", to: "/trips", search: { q: "Egypt" } },
       { label: "Morocco", to: "/trips", search: { q: "Morocco" } },
+      { label: "Kenya", to: "/trips", search: { q: "Kenya" } },
       { label: "Tanzania", to: "/trips", search: { q: "Tanzania" } },
       { label: "Vietnam", to: "/trips", search: { q: "Vietnam" } },
       { label: "Sri Lanka", to: "/trips", search: { q: "Sri Lanka" } },

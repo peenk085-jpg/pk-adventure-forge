@@ -21,6 +21,7 @@ import morocco from "@/assets/dest-morocco.jpg";
 import safari from "@/assets/dest-safari.jpg";
 import srilanka from "@/assets/dest-srilanka.jpg";
 import sailing from "@/assets/dest-sailing.jpg";
+import kenya from "@/assets/dest-kenya.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -55,6 +56,7 @@ const DEALS = [
   { name: "Egypt", image: egypt },
   { name: "Morocco", image: morocco },
   { name: "Tanzania", image: safari },
+  { name: "Kenya", image: kenya },
   { name: "Sri Lanka", image: srilanka },
   { name: "Turkey", image: sailing },
   { name: "Vietnam", image: hero },
@@ -72,6 +74,12 @@ const DESTINATIONS = [
     query: "Morocco",
     image: morocco,
     text: "Get lost in the souks of Marrakech, sleep under Sahara stars and wander the blue lanes of Chefchaouen.",
+  },
+  {
+    name: "Kenya safaris",
+    query: "Kenya",
+    image: kenya,
+    text: "Witness the Great Migration in the Masai Mara, meet Maasai communities and fly from bush to Diani beach.",
   },
   {
     name: "Tanzania safaris",
