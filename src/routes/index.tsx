@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Star,
   ShieldCheck,
@@ -13,6 +13,8 @@ import {
 import { Header } from "@/components/site/Header";
 import { SearchBar } from "@/components/site/SearchBar";
 import { Footer } from "@/components/site/Footer";
+import { NewsletterSignup } from "@/components/site/NewsletterSignup";
+import { TRIPS } from "@/data/trips";
 import hero from "@/assets/hero.jpg";
 import egypt from "@/assets/dest-egypt.jpg";
 import morocco from "@/assets/dest-morocco.jpg";
@@ -61,62 +63,27 @@ const DEALS = [
 const DESTINATIONS = [
   {
     name: "Egypt tours",
+    query: "Egypt",
     image: egypt,
     text: "Stand beneath the Pyramids of Giza, cruise the Nile between Luxor and Aswan and dive the Red Sea reefs.",
   },
   {
     name: "Morocco tours",
+    query: "Morocco",
     image: morocco,
     text: "Get lost in the souks of Marrakech, sleep under Sahara stars and wander the blue lanes of Chefchaouen.",
   },
   {
     name: "Tanzania safaris",
+    query: "Tanzania",
     image: safari,
     text: "Track the Great Migration across the Serengeti, then unwind on the white sands of Zanzibar.",
   },
   {
     name: "Sri Lanka tours",
+    query: "Sri Lanka",
     image: srilanka,
     text: "Ride the hill-country train through tea plantations, climb Sigiriya and spot leopards in Yala.",
-  },
-];
-
-const TOURS = [
-  {
-    title: "Pharaohs & Felucca",
-    place: "Egypt",
-    days: "9 days",
-    price: "$1,395",
-    was: "$1,690",
-    image: egypt,
-    rating: 4.8,
-  },
-  {
-    title: "Serengeti Big Five",
-    place: "Tanzania",
-    days: "8 days",
-    price: "$2,450",
-    was: "$2,890",
-    image: safari,
-    rating: 4.9,
-  },
-  {
-    title: "Kasbahs & Sahara Nights",
-    place: "Morocco",
-    days: "10 days",
-    price: "$1,180",
-    was: "$1,420",
-    image: morocco,
-    rating: 4.7,
-  },
-  {
-    title: "Turquoise Coast Sail",
-    place: "Turkey",
-    days: "7 days",
-    price: "$990",
-    was: "$1,240",
-    image: sailing,
-    rating: 4.8,
   },
 ];
 
@@ -137,6 +104,8 @@ const REVIEWS = [
     text: "Small group, brilliant riads and a desert camp we still talk about. Booking with P&K was effortless.",
   },
 ];
+
+const TRENDING = TRIPS.slice(0, 4);
 
 function Index() {
   return (
@@ -215,9 +184,10 @@ function Index() {
             </h2>
             <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-6">
               {DEALS.map((deal) => (
-                <a
+                <Link
                   key={deal.name}
-                  href="#tours"
+                  to="/trips"
+                  search={{ q: deal.name }}
                   className="group relative overflow-hidden rounded-2xl shadow-float"
                 >
                   <img
@@ -232,7 +202,7 @@ function Index() {
                     {deal.name}
                     <span className="mt-0.5 block text-xs font-bold text-accent">2-for-1</span>
                   </span>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -249,7 +219,7 @@ function Index() {
             </p>
             <div className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
               {DESTINATIONS.map((dest) => (
-                <a key={dest.name} href="#tours" className="group">
+                <Link key={dest.name} to="/trips" search={{ q: dest.query }} className="group">
                   <div className="overflow-hidden rounded-2xl">
                     <img
                       src={dest.image}
@@ -265,7 +235,7 @@ function Index() {
                     <ArrowRight className="size-4 text-accent transition-transform group-hover:translate-x-1" />
                   </h3>
                   <p className="mt-2 text-sm text-muted-foreground">{dest.text}</p>
-                </a>
+                </Link>
               ))}
             </div>
           </div>
@@ -274,35 +244,46 @@ function Index() {
         {/* Featured tours */}
         <section id="tours" className="bg-muted py-20">
           <div className="container-pk">
-            <h2 className="font-display text-2xl font-extrabold text-primary sm:text-3xl">
-              Trending adventures
-            </h2>
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <h2 className="font-display text-2xl font-extrabold text-primary sm:text-3xl">
+                Trending adventures
+              </h2>
+              <Link to="/trips" className="text-sm font-bold text-accent underline">
+                View all adventures
+              </Link>
+            </div>
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-              {TOURS.map((tour) => (
+              {TRENDING.map((tour) => (
                 <article
-                  key={tour.title}
+                  key={tour.slug}
                   className="flex flex-col overflow-hidden rounded-2xl bg-card shadow-float"
                 >
-                  <div className="relative">
+                  <Link to="/trips/$slug" params={{ slug: tour.slug }} className="group relative block">
                     <img
                       src={tour.image}
                       alt={tour.title}
                       loading="lazy"
                       width={900}
                       height={700}
-                      className="h-44 w-full object-cover"
+                      className="h-44 w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
                     <span className="absolute left-3 top-3 rounded-full bg-deal px-3 py-1 text-xs font-bold text-primary-foreground">
-                      Save {tour.was}
+                      Was {tour.was}
                     </span>
-                  </div>
+                  </Link>
                   <div className="flex flex-1 flex-col p-5">
                     <span className="flex items-center gap-1 text-xs font-bold uppercase tracking-wider text-accent">
                       <MapPin className="size-3.5" aria-hidden="true" />
                       {tour.place}
                     </span>
                     <h3 className="mt-2 font-display text-lg font-bold text-primary">
-                      {tour.title}
+                      <Link
+                        to="/trips/$slug"
+                        params={{ slug: tour.slug }}
+                        className="hover:text-accent"
+                      >
+                        {tour.title}
+                      </Link>
                     </h3>
                     <p className="mt-2 flex items-center gap-3 text-sm text-muted-foreground">
                       <span className="flex items-center gap-1">
@@ -323,12 +304,13 @@ function Index() {
                           {tour.price}
                         </span>
                       </span>
-                      <a
-                        href="#contact"
+                      <Link
+                        to="/trips/$slug"
+                        params={{ slug: tour.slug }}
                         className="rounded-full bg-accent px-4 py-2 text-sm font-bold text-accent-foreground transition-transform hover:-translate-y-0.5"
                       >
                         View trip
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </article>
@@ -366,27 +348,7 @@ function Index() {
             <h2 className="max-w-2xl font-display text-2xl font-extrabold text-primary-foreground sm:text-3xl">
               Get our best trip deals before anyone else
             </h2>
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="flex w-full max-w-md flex-col gap-3 sm:flex-row"
-            >
-              <label htmlFor="email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="email"
-                type="email"
-                required
-                placeholder="you@email.com"
-                className="flex-1 rounded-full bg-card px-5 py-3 text-sm text-foreground outline-none ring-accent focus:ring-2"
-              />
-              <button
-                type="submit"
-                className="rounded-full bg-accent px-6 py-3 text-sm font-bold text-accent-foreground transition-transform hover:-translate-y-0.5"
-              >
-                Subscribe
-              </button>
-            </form>
+            <NewsletterSignup />
           </div>
         </section>
       </main>
