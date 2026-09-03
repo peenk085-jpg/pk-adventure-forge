@@ -2,6 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Award, Headphones, Globe2, Map, Users, Menu, X } from "lucide-react";
 
+import { useSiteSettings } from "@/hooks/useSiteSettings";
+
 const NAV: { label: string; to: string; search?: Record<string, string> }[] = [
   { label: "Tours", to: "/trips", search: { style: "Group tour" } },
   { label: "Safaris", to: "/trips", search: { style: "Safari" } },
@@ -20,6 +22,7 @@ const STRIP = [
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const settings = useSiteSettings();
 
   return (
     <header>
@@ -98,7 +101,7 @@ export function Header() {
 
       <div className="bg-deal py-3 text-center">
         <p className="container-pk text-sm font-bold text-primary-foreground sm:text-base">
-          Island Getaways 2026: Up To 40% Off - Limited Availability, Book Today!
+          {settings["promo_banner"]}
         </p>
       </div>
     </header>

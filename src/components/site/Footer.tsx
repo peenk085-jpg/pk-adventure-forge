@@ -1,5 +1,7 @@
 import { Link } from "@tanstack/react-router";
 
+import { useSiteSettings } from "@/hooks/useSiteSettings";
+
 type FooterLink = { label: string; to: string; search?: Record<string, string> };
 
 const COLUMNS: { title: string; links: FooterLink[] }[] = [
@@ -43,6 +45,7 @@ const COLUMNS: { title: string; links: FooterLink[] }[] = [
 ];
 
 export function Footer() {
+  const settings = useSiteSettings();
   return (
     <footer id="contact-info" className="bg-primary text-primary-foreground">
       <div className="container-pk grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-5">
@@ -52,13 +55,13 @@ export function Footer() {
             ADVENTURES
           </span>
           <p className="mt-4 max-w-xs text-sm text-primary-foreground/70">
-            Small-group and tailor-made journeys led by local guides since 2009.
+            {settings["footer_tagline"]}
           </p>
           <a
-            href="mailto:hello@pkadventures.com"
+            href={`mailto:${settings["contact_email"]}`}
             className="mt-4 inline-block text-sm font-bold text-accent"
           >
-            hello@pkadventures.com
+            {settings["contact_email"]}
           </a>
         </div>
         {COLUMNS.map((col) => (
