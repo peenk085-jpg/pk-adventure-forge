@@ -15,6 +15,7 @@ export type Trip = {
   was: string;
   rating: number;
   image: string;
+  imageKey: string;
   style: "Group tour" | "Safari" | "Sail & cruise" | "Private tour";
   summary: string;
   highlights: string[];
@@ -33,6 +34,7 @@ export const TRIPS: Trip[] = [
     was: "$1,690",
     rating: 4.8,
     image: egypt,
+    imageKey: "img_egypt",
     style: "Group tour",
     summary:
       "From the Pyramids of Giza to the temples of Luxor and a night sailing the Nile by felucca - the classic Egypt journey with an expert Egyptologist guide.",
@@ -66,6 +68,7 @@ export const TRIPS: Trip[] = [
     was: "$2,890",
     rating: 4.9,
     image: safari,
+    imageKey: "img_safari",
     style: "Safari",
     summary:
       "Game drives across the Serengeti and Ngorongoro Crater in search of the Big Five, finishing on the white sand of Zanzibar.",
@@ -98,6 +101,7 @@ export const TRIPS: Trip[] = [
     was: "$1,420",
     rating: 4.7,
     image: morocco,
+    imageKey: "img_morocco",
     style: "Group tour",
     summary:
       "Medinas, mountain passes and a desert camp under the stars - Morocco from Marrakech to Fes with riads all the way.",
@@ -132,6 +136,7 @@ export const TRIPS: Trip[] = [
     was: "$1,240",
     rating: 4.8,
     image: sailing,
+    imageKey: "img_sailing",
     style: "Sail & cruise",
     summary:
       "A week aboard a traditional gulet along Turkey's Lycian coast - swim stops, sunken ruins and harbour towns.",
@@ -163,6 +168,7 @@ export const TRIPS: Trip[] = [
     was: "$1,850",
     rating: 4.8,
     image: srilanka,
+    imageKey: "img_srilanka",
     style: "Group tour",
     summary:
       "Rock fortresses, hill-country trains, tea estates and leopard tracking in Yala, finishing on the southern beaches.",
@@ -198,6 +204,7 @@ export const TRIPS: Trip[] = [
     was: "$1,990",
     rating: 4.7,
     image: hero,
+    imageKey: "img_hero",
     style: "Group tour",
     summary:
       "Hanoi street food, a night on Ha Long Bay, imperial Hue, lantern-lit Hoi An and the Mekong Delta by boat.",
@@ -234,6 +241,7 @@ export const TRIPS: Trip[] = [
     was: "$2,650",
     rating: 4.9,
     image: kenya,
+    imageKey: "img_kenya",
     style: "Safari",
     summary:
       "Big cats, endless plains and the thunder of hooves across the Masai Mara - Kenya's greatest safari with hot-air balloon option and Maasai village visits.",
@@ -265,6 +273,7 @@ export const TRIPS: Trip[] = [
     was: "$3,190",
     rating: 4.8,
     image: kenya,
+    imageKey: "img_kenya",
     style: "Group tour",
     summary:
       "The classic Kenya combo: the Masai Mara's wildlife, Rift Valley lakes and the palm-fringed beaches of Diani for the ultimate bush-to-beach escape.",

@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { supabase } from "@/integrations/supabase/client";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -41,6 +42,7 @@ const field =
 const labelCls = "block text-xs font-bold uppercase tracking-wider text-primary";
 
 function ContactPage() {
+  const settings = useSiteSettings();
   const [busy, setBusy] = useState(false);
   const [sent, setSent] = useState(false);
 
@@ -89,19 +91,22 @@ function ContactPage() {
           <ul className="mt-8 space-y-4">
             <li className="flex items-center gap-3 text-sm font-semibold text-foreground">
               <Mail className="size-5 text-accent" aria-hidden="true" />
-              <a href="mailto:hello@pkadventures.com" className="hover:text-accent">
-                hello@pkadventures.com
+              <a href={`mailto:${settings["contact_email"]}`} className="hover:text-accent">
+                {settings["contact_email"]}
               </a>
             </li>
             <li className="flex items-center gap-3 text-sm font-semibold text-foreground">
               <Phone className="size-5 text-accent" aria-hidden="true" />
-              <a href="tel:+442038088000" className="hover:text-accent">
-                +44 20 3808 8000
+              <a
+                href={`tel:${(settings["contact_phone"] ?? "").replace(/[^+\d]/g, "")}`}
+                className="hover:text-accent"
+              >
+                {settings["contact_phone"]}
               </a>
             </li>
             <li className="flex items-center gap-3 text-sm font-semibold text-foreground">
               <MapPin className="size-5 text-accent" aria-hidden="true" />
-              Open 7 days · 24/7 support while you travel
+              {settings["contact_hours"]}
             </li>
           </ul>
         </div>

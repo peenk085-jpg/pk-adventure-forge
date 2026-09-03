@@ -15,13 +15,7 @@ import { SearchBar } from "@/components/site/SearchBar";
 import { Footer } from "@/components/site/Footer";
 import { NewsletterSignup } from "@/components/site/NewsletterSignup";
 import { TRIPS } from "@/data/trips";
-import hero from "@/assets/hero.jpg";
-import egypt from "@/assets/dest-egypt.jpg";
-import morocco from "@/assets/dest-morocco.jpg";
-import safari from "@/assets/dest-safari.jpg";
-import srilanka from "@/assets/dest-srilanka.jpg";
-import sailing from "@/assets/dest-sailing.jpg";
-import kenya from "@/assets/dest-kenya.jpg";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -53,44 +47,44 @@ const USPS = [
 ];
 
 const DEALS = [
-  { name: "Egypt", image: egypt },
-  { name: "Morocco", image: morocco },
-  { name: "Tanzania", image: safari },
-  { name: "Kenya", image: kenya },
-  { name: "Sri Lanka", image: srilanka },
-  { name: "Turkey", image: sailing },
-  { name: "Vietnam", image: hero },
+  { name: "Egypt", imageKey: "img_egypt" },
+  { name: "Morocco", imageKey: "img_morocco" },
+  { name: "Tanzania", imageKey: "img_safari" },
+  { name: "Kenya", imageKey: "img_kenya" },
+  { name: "Sri Lanka", imageKey: "img_srilanka" },
+  { name: "Turkey", imageKey: "img_sailing" },
+  { name: "Vietnam", imageKey: "img_hero" },
 ];
 
 const DESTINATIONS = [
   {
     name: "Egypt tours",
     query: "Egypt",
-    image: egypt,
+    imageKey: "img_egypt",
     text: "Stand beneath the Pyramids of Giza, cruise the Nile between Luxor and Aswan and dive the Red Sea reefs.",
   },
   {
     name: "Morocco tours",
     query: "Morocco",
-    image: morocco,
+    imageKey: "img_morocco",
     text: "Get lost in the souks of Marrakech, sleep under Sahara stars and wander the blue lanes of Chefchaouen.",
   },
   {
     name: "Kenya safaris",
     query: "Kenya",
-    image: kenya,
+    imageKey: "img_kenya",
     text: "Witness the Great Migration in the Masai Mara, meet Maasai communities and fly from bush to Diani beach.",
   },
   {
     name: "Tanzania safaris",
     query: "Tanzania",
-    image: safari,
+    imageKey: "img_safari",
     text: "Track the Great Migration across the Serengeti, then unwind on the white sands of Zanzibar.",
   },
   {
     name: "Sri Lanka tours",
     query: "Sri Lanka",
-    image: srilanka,
+    imageKey: "img_srilanka",
     text: "Ride the hill-country train through tea plantations, climb Sigiriya and spot leopards in Yala.",
   },
 ];
@@ -116,6 +110,7 @@ const REVIEWS = [
 const TRENDING = TRIPS.slice(0, 4);
 
 function Index() {
+  const settings = useSiteSettings();
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -124,7 +119,7 @@ function Index() {
         {/* Hero */}
         <section className="relative">
           <img
-            src={hero}
+            src={settings["img_hero"]}
             alt="Turquoise lagoon framed by jungle-covered karst cliffs at sunset"
             width={1920}
             height={1088}
@@ -199,7 +194,7 @@ function Index() {
                   className="group relative overflow-hidden rounded-2xl shadow-float"
                 >
                   <img
-                    src={deal.image}
+                    src={settings[deal.imageKey]}
                     alt={`${deal.name} adventures`}
                     loading="lazy"
                     width={900}
@@ -230,7 +225,7 @@ function Index() {
                 <Link key={dest.name} to="/trips" search={{ q: dest.query }} className="group">
                   <div className="overflow-hidden rounded-2xl">
                     <img
-                      src={dest.image}
+                      src={settings[dest.imageKey]}
                       alt={dest.name}
                       loading="lazy"
                       width={900}
@@ -268,7 +263,7 @@ function Index() {
                 >
                   <Link to="/trips/$slug" params={{ slug: tour.slug }} className="group relative block">
                     <img
-                      src={tour.image}
+                      src={settings[tour.imageKey]}
                       alt={tour.title}
                       loading="lazy"
                       width={900}
