@@ -58,6 +58,7 @@ function TripNotFound() {
 }
 
 function TripDetail() {
+  const settings = useSiteSettings();
   const { trip } = Route.useLoaderData();
   const others = TRIPS.filter((t) => t.slug !== trip.slug).slice(0, 3);
 

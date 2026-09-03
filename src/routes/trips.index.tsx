@@ -37,6 +37,7 @@ export const Route = createFileRoute("/trips/")({
 const STYLES = ["All", "Group tour", "Safari", "Sail & cruise", "Private tour"];
 
 function TripsIndex() {
+  const settings = useSiteSettings();
   const { q, style } = Route.useSearch();
   const term = (q ?? "").toLowerCase().trim();
   const activeStyle = style ?? "All";
