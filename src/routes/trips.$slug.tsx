@@ -3,6 +3,7 @@ import { Check, Clock, MapPin, Star, X } from "lucide-react";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { BookingForm } from "@/components/site/BookingForm";
 import { getTrip, TRIPS } from "@/data/trips";
 
@@ -66,7 +67,7 @@ function TripDetail() {
       <main>
         <section className="relative">
           <img
-            src={trip.image}
+            src={settings[trip.imageKey]}
             alt={`${trip.title} in ${trip.place}`}
             width={1920}
             height={800}
@@ -184,7 +185,7 @@ function TripDetail() {
                   className="group overflow-hidden rounded-2xl bg-card shadow-float"
                 >
                   <img
-                    src={t.image}
+                    src={settings[t.imageKey]}
                     alt={t.title}
                     loading="lazy"
                     width={900}

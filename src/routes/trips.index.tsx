@@ -4,6 +4,7 @@ import { z } from "zod";
 
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { useSiteSettings } from "@/hooks/useSiteSettings";
 import { TRIPS } from "@/data/trips";
 
 const searchSchema = z.object({
@@ -104,7 +105,7 @@ function TripsIndex() {
               >
                 <Link to="/trips/$slug" params={{ slug: trip.slug }} className="group relative block">
                   <img
-                    src={trip.image}
+                    src={settings[trip.imageKey]}
                     alt={trip.title}
                     loading="lazy"
                     width={900}
