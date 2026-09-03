@@ -98,7 +98,7 @@ function ContactPage() {
             <li className="flex items-center gap-3 text-sm font-semibold text-foreground">
               <Phone className="size-5 text-accent" aria-hidden="true" />
               <a
-                href={`tel:${settings["contact_phone"].replace(/[^+\d]/g, "")}`}
+                href={`tel:${(settings["contact_phone"] ?? "").replace(/[^+\d]/g, "")}`}
                 className="hover:text-accent"
               >
                 {settings["contact_phone"]}
