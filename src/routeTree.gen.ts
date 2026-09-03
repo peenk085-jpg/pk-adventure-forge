@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as TripsIndexRouteImport } from './routes/trips.index'
 import { Route as TripsSlugRouteImport } from './routes/trips.$slug'
@@ -18,6 +19,11 @@ import { Route as ApiPublicSiteImageSplatRouteImport } from './routes/api/public
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -43,6 +49,7 @@ const ApiPublicSiteImageSplatRoute = ApiPublicSiteImageSplatRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/trips/$slug': typeof TripsSlugRoute
   '/trips/': typeof TripsIndexRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/trips/$slug': typeof TripsSlugRoute
   '/trips': typeof TripsIndexRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
   '/trips/$slug': typeof TripsSlugRoute
   '/trips/': typeof TripsIndexRoute
@@ -66,12 +75,24 @@ export interface FileRoutesById {
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/contact' | '/trips/$slug' | '/trips/' | '/api/public/site-image/$'
+    | '/'
+    | '/admin'
+    | '/contact'
+    | '/trips/$slug'
+    | '/trips/'
+    | '/api/public/site-image/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/trips/$slug' | '/trips' | '/api/public/site-image/$'
+  to:
+    | '/'
+    | '/admin'
+    | '/contact'
+    | '/trips/$slug'
+    | '/trips'
+    | '/api/public/site-image/$'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/contact'
     | '/trips/$slug'
     | '/trips/'
@@ -80,6 +101,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   ContactRoute: typeof ContactRoute
   TripsSlugRoute: typeof TripsSlugRoute
   TripsIndexRoute: typeof TripsIndexRoute
@@ -93,6 +115,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -128,6 +157,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   ContactRoute: ContactRoute,
   TripsSlugRoute: TripsSlugRoute,
   TripsIndexRoute: TripsIndexRoute,
